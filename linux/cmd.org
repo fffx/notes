@@ -1,0 +1,4 @@
+* Search file
+** locate
+   -locate 正则表达式
+   locate -ri "\.iso$" # 查找.iso结尾的文件，-r: regex, -i ignore-case
