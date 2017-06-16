@@ -1,0 +1,7 @@
+* sidekiq 使用
+
+- =参数不要用复杂对象=, 只能是普通的字符串，因为worker的参数会被序列化,
+- 接收到的hash， key是字符串， 不要用symbol, +h[:xxx]+ , _h["xxx"]_
+- 一个job因能被执行多次， 因为一个 ~job~ 可能失败，+sidekiq会重试+，所以如果涉及数据库
+- xxx +xxx+
+   +sss+

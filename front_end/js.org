@@ -1,0 +1,8 @@
+* Basic
+  + 浮点数  0.1 + 0.2 == 0.3 // false
+  ( 0.1 + 0.2) - 0.3 < 0.0001 // true
+  参考： https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html
+  不要比较浮点数，而是因该判断两者之差是否小于某个范围uuuuuu
+
+  - NaN 不能用==来判断，NaN == NaN // false
+    要用isNaN() 或 != 来判断
