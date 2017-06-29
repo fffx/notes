@@ -1,8 +1,8 @@
 * org-mode
 ** format
-- =xxx=, ~xxx~, _xxx_, *xxx*,/xxx/, +sss+
-- quick insert source code with ==easy-template== , input '<s' and /TAB/
+- =xxx=, ~xxx~, _xxx_, *xxx* ,/xxx/ , +sss+
+- quick insert source code with =easy-template= , input '<s' and press ~TAB~
   #+BEGIN_SRC ruby
 
   #+END_SRC
-- horizontal line -----
+- horizontal line ----

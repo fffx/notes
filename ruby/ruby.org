@@ -1,4 +1,61 @@
 * basic
+** how ruby works
++ where ruby find its libraries(like java class path)
+#+BEGIN_SRC ruby
+ruby -e 'puts $:'
+
+/fangxing/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0
+/home/fangxing/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/x86_64-linux
+/home/fangxing/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby
+/home/fangxing/.rvm/rubies/ruby-2.2.2/lib/ruby/vendor_ruby/2.2.0
+/home/fangxing/.rvm/rubies/ruby-2.2.2/lib/ruby/vendor_ruby/2.2.0/x86_64-linux
+/home/fangxing/.rvm/rubies/ruby-2.2.2/lib/ruby/vendor_ruby
+/home/fangxing/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0
+/home/fangxing/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/x86_64-linux
+#+END_SRC
+
+So when we =require 'some_thing'= ruby will try find it from this paths, if we want =require= a file from current directory we can use =require_relative=
+** heredoc, string, array, regex,
++ multipe line string, here doc and %(%q, %Q)
+#+BEGIN_SRC ruby
+ execute_sql( <<-SQL
+     select *
+     from users
+     where name="xxx"
+     SQL
+ )
+ puts %{
+   aaaa
+   vvvv
+ccc
+}
+
+#+END_SRC
+
++ regex
+/pattern/
+%r{pattern}
+
++ General Delimited Input
+Example Meaning Type
+#+BEGIN_SRC ruby
+%q{\a and #{1+2} are literal} Single-quoted string %q
+%Q{\a and #{1+2} are expanded} Double-quoted string %Q , %
+%w[ one two three ] Array of strings %w , %W
+%i[ one two three ] Array of symbols %i , %I (new in ⇡ 2.0 ⇣ )
+%r{cat|dog} Regular expression pattern %r
+%s!a symbol! A symbol %s
+%x(df -h) Shell command %x
+#+END_SRC
+Unlike their lowercase counterparts, %I , %Q , and %W will preform interpolation:
+#+BEGIN_SRC ruby
+%i{ one digit#{1+1} three } # => [:one, :"digit\#{1+1}", :three]
+%I{ one digit#{1+1} three } # => [:one, :digit2, :three]
+%q{ one digit#{1+1} three } # => " one digit\#{1+1} three "
+%Q{ one digit#{1+1} three } # => " one digit2 three "
+%w{ one digit#{1+1} three } # => ["one", "digit\#{1+1}", "three"]
+%W{ one digit#{1+1} three } # => ["one", "digit2", "three"]
+#+END_SRC
 ** 函数 function
 *** 参数
 - 默认值，hash, =def func(a, b=2, c: false)...=
@@ -49,15 +106,14 @@ variable was =block-local= by writing it as follows:
  square = "some shape"
  sum = 0
  [1, 2, 3, 4].each do |value; square|  # 用分号隔开表示局部变量
- square = value * value
- # this is a different variable
- sum
- += square
+   square = value * value
+   # this is a different variable
+   sum += square
  end
  puts sum
+#=> 30
  puts square
- produces:
- 30
- some shape
+#=> some shape
 
 #+END_SRC
+** Meta Programming
